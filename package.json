@@ -1,0 +1,28 @@
+{
+  "name": "rosspi",
+  "version": "1.0.0",
+  "description": "Kitchen utility for magnetic switch sensor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rossanmol/ross-pi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rossanmol/ross-pi/issues"
+  },
+  "homepage": "https://github.com/rossanmol/ross-pi#readme",
+  "dependencies": {
+    "@types/node-hue-api": "^2.3.0",
+    "huejay": "^1.8.4",
+    "node-grovepi": "^2.2.2",
+    "node-hue-api": "^2.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.0.3"
+  }
+}
