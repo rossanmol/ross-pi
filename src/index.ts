@@ -3,14 +3,13 @@ import * as program from "commander";
 import { readFileSync } from "fs";
 import * as nodeCleanup from "node-cleanup";
 import { nupnpSearch } from "node-hue-api";
-import { from, Subscription } from "rxjs";
-import { filter, map, tap } from "rxjs/operators";
+import { from } from "rxjs";
+import { filter, first, map, switchMap } from "rxjs/operators";
 
 import { startSwitch } from "./switch/switch.const";
 import { SwitchData } from "./switch/switch.model";
 
 let data: Partial<SwitchData> | undefined;
-let data$$: Subscription | undefined;
 
 // Validation
 program.option("-d, --data [value]", "Set data for lights")
@@ -35,10 +34,6 @@ if (!(data && data.username && data.bridgeId && data.switches && data.switches.l
 
 // Process Exit Checkup
 nodeCleanup(() => {
-	if (data$$) {
-		data$$.unsubscribe();
-	}
-
 	if (lights$$) {
 		lights$$.unsubscribe();
 	}
@@ -52,5 +47,6 @@ const lights$$ = from(nupnpSearch())
 	.pipe(
 		map(bridges => bridges.find(bridge => bridge.id === data!.bridgeId)),
 		filter(bridge => !!bridge),
-		tap(bridge => data$$ = startSwitch(bridge!.ipaddress, data!.username!, data!.switches!).subscribe())
+		first(),
+		switchMap(bridge => startSwitch(bridge!.ipaddress, data!.username!, data!.switches!))
 	).subscribe();
