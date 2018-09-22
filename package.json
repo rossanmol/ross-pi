@@ -1,42 +1,43 @@
 {
-  "name": "rosspi",
-  "version": "1.0.0",
-  "description": "Kitchen utility for magnetic switch sensor",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "lint": "tslint -p tsconfig.json",
-    "build": "tsc",
-	"test": "jest --config jestconfig.json",
-
-	"prepare": "npm run build",
-	"prepublishOnly": "npm test && npm run lint",
-	"preversion": "npm run lint",
-	"version": "npm run format && git add -A src",
-	"postversion": "git push && git push --tags"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/rossanmol/ross-pi.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rossanmol/ross-pi/issues"
-  },
-  "homepage": "https://github.com/rossanmol/ross-pi#readme",
-  "dependencies": {
-    "@types/i2c-bus": "1.0.18",
-    "i2c-bus": "^4.0.1",
-    "node-cleanup": "^2.1.2",
-    "@types/node-cleanup": "^2.1.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^23.3.2",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.1",
-    "tslint": "^5.11.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.0.3"
-  }
+	"name": "rosspi",
+	"version": "1.0.2",
+	"description": "Kitchen utility for magnetic switch sensor",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"preferGlobal": true,
+	"bin": "dist/index.js",
+	"scripts": {
+		"lint": "tslint -p tsconfig.json",
+		"build": "tsc",
+		"test": "jest --config jestconfig.json",
+		"prepare": "npm run build",
+		"prepublishOnly": "npm test && npm run lint",
+		"preversion": "npm run lint",
+		"version": "npm run format && git add -A src",
+		"postversion": "git push && git push --tags"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/rossanmol/ross-pi.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/rossanmol/ross-pi/issues"
+	},
+	"homepage": "https://github.com/rossanmol/ross-pi#readme",
+	"dependencies": {
+		"@types/i2c-bus": "1.0.18",
+		"i2c-bus": "^4.0.1",
+		"node-cleanup": "^2.1.2",
+		"@types/node-cleanup": "^2.1.0"
+	},
+	"devDependencies": {
+		"@types/jest": "^23.3.2",
+		"jest": "^23.6.0",
+		"ts-jest": "^23.10.1",
+		"tslint": "^5.11.0",
+		"tslint-eslint-rules": "^5.4.0",
+		"typescript": "^3.0.3"
+	}
 }

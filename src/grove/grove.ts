@@ -40,7 +40,7 @@ export class GrovePi {
 		this.write({ command: Command.read, pin });
 
 		const buffer = Buffer.alloc(1);
-		const ret = this.bus.i2cReadSync(this.address, 1, buffer);
+		const ret = this.bus.i2cReadSync(this.address, buffer.length, buffer);
 		return ret > 0 ? buffer[0] : undefined;
 	}
 
@@ -49,7 +49,7 @@ export class GrovePi {
 			return false;
 		}
 
-		const buffer = Buffer.from([bytes.command, bytes.pin, bytes.value, bytes.unknown]);
+		const buffer = new Buffer([bytes.command, bytes.pin, bytes.value, bytes.unknown]);
 
 		return this.bus.i2cWriteSync(this.address, buffer.length, buffer) > 0;
 	}

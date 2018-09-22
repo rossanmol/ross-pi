@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as nodeCleanup from "node-cleanup";
 
 import { GrovePi } from "./grove/grove";
