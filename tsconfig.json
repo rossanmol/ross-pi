@@ -1,9 +1,35 @@
 {
+	"compileOnSave": false,
 	"compilerOptions": {
-	  "target": "es5",
-	  "module": "commonjs",
-	  "strict": true,
-	  "outDir": "dist",
-	  "sourceMap": true
-	}
-  }
+		"outDir": "dist",
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"declaration": false,
+		"noImplicitReturns": true,
+		"noImplicitAny": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowUnreachableCode": false,
+		"skipLibCheck": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"strictNullChecks": true,
+		"importHelpers": true,
+		"lib": [
+			"es5",
+			"es6"
+		],
+		"typeRoots": [
+			"node_modules/@types"
+		]
+	},
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
+}
