@@ -1,5 +1,7 @@
 import { existsSync } from "fs";
 import { openSync, I2cBus } from "i2c-bus";
+import { interval, Observable } from "rxjs";
+import { distinctUntilChanged, filter, map, tap } from "rxjs/operators";
 
 import { BufferBytes, Command } from "./grove.model";
 
@@ -32,16 +34,20 @@ export class GrovePi {
 		}
 	}
 
-	read(pin: number): number | undefined {
-		if (!this.bus) {
-			return undefined;
-		}
+	read(pin: number): Observable<{ value: number; pin: number; }> {
+		return interval(500).pipe(
+			filter(() => !!this.bus),
+			tap(() => this.write({ command: Command.read, pin })),
+			map(() => {
+				const buffer = Buffer.alloc(1);
+				const status = this.bus!.i2cReadSync(this.address, buffer.length, buffer);
 
-		this.write({ command: Command.read, pin });
-
-		const buffer = Buffer.alloc(1);
-		const ret = this.bus.i2cReadSync(this.address, buffer.length, buffer);
-		return ret > 0 ? buffer[0] : undefined;
+				return status > 0 ? buffer[0] : undefined;
+			}),
+			filter(value => value !== undefined),
+			distinctUntilChanged(),
+			map((value: number) => ({ value, pin }))
+		);
 	}
 
 	private write(bytes: BufferBytes): boolean {
